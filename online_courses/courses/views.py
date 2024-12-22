@@ -4,6 +4,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import RegistrationForm, LoginForm, ReviewForm, PaymentForm, QuizForm
 from django.contrib import messages
+from rest_framework import viewsets, permissions
+from .serializers import ReviewSerializer
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 def home(request):
     categories = Category.objects.all()
@@ -258,3 +263,29 @@ def quiz_result(request, quiz_id):
         'total': quiz.total_marks
     }
     return render(request, 'courses/quiz_result.html', context)
+
+
+class IsOwnerOrReadOnly(permissions.BasePermission):
+    """
+    Custom permission to only allow owners of a review to edit or delete it.
+    """
+
+    def has_object_permission(self, request, view, obj):
+        # Read permissions are allowed to any request,
+        # so we'll always allow GET, HEAD or OPTIONS requests.
+        if request.method in permissions.SAFE_METHODS:
+            return True
+
+        # Write permissions are only allowed to the owner of the review.
+        return obj.user == request.user
+
+class ReviewViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows reviews to be viewed or edited.
+    """
+    queryset = Review.objects.all().select_related('user', 'course')
+    serializer_class = ReviewSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

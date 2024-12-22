@@ -1,0 +1,13 @@
+{% extends 'courses/base.html' %}
+
+{% block title %}Quiz Result - {{ quiz.title }}{% endblock %}
+
+{% block content %}
+<div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">Quiz Completed!</h4>
+    <p>You scored <strong>{{ score }}</strong> out of <strong>{{ total }}</strong>.</p>
+    <hr>
+    <a href="{% url 'course_detail' quiz.course.id %}" class="btn btn-primary">Back to Course</a>
+    <a href="{% url 'take_quiz' quiz.id %}" class="btn btn-secondary">Retake Quiz</a>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'courses/base.html' %}
+
+{% block title %}Your Progress - Online Courses{% endblock %}
+
+{% block content %}
+<h2>Your Progress in {{ progress.course.title }}</h2>
+<h3>Completed Lessons</h3>
+<ul class="list-group">
+    {% for lesson in progress.completed_lessons.all %}
+        <li class="list-group-item">{{ lesson.title }}</li>
+    {% empty %}
+        <li class="list-group-item">No lessons completed yet.</li>
+    {% endfor %}
+</ul>
+<h3>Quiz Scores</h3>
+<ul class="list-group">
+    {% for quiz_id, score in progress.quiz_scores.items %}
+        <li class="list-group-item">Quiz {{ quiz_id }}: {{ score }}</li>
+    {% empty %}
+        <li class="list-group-item">No quizzes taken yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

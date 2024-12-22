@@ -1,0 +1,12 @@
+{% extends 'courses/base.html' %}
+
+{% block title %}Make Payment - {{ course.title }}{% endblock %}
+
+{% block content %}
+<h2>Make Payment for {{ course.title }}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Pay Now</button>
+</form>
+{% endblock %}

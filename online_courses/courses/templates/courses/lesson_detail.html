@@ -1,0 +1,10 @@
+{% extends 'courses/base.html' %}
+
+{% block title %}{{ lesson.title }} - Online Courses{% endblock %}
+
+{% block content %}
+<h2>{{ lesson.title }}</h2>
+<p>{{ lesson.content }}</p>
+<a href="{{ lesson.video_url }}" target="_blank" class="btn btn-primary">Watch Video</a>
+<a href="{% url 'user_progress' lesson.course.id %}" class="btn btn-secondary">View Progress</a>
+{% endblock %}

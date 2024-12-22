@@ -1,0 +1,36 @@
+{% extends 'courses/base.html' %}
+
+{% block title %}{{ quiz.title }} - Quiz Details{% endblock %}
+
+{% block content %}
+<h2>{{ quiz.title }}</h2>
+<p><strong>Course:</strong> {{ quiz.course.title }}</p>
+<p><strong>Total Marks:</strong> {{ quiz.total_marks }}</p>
+
+<hr>
+
+<h3>Questions</h3>
+{% if questions %}
+    <ol>
+        {% for question in questions %}
+            <li>
+                <p>{{ question.question_text }}</p>
+                <ul>
+                    <li>A. {{ question.option_a }}</li>
+                    <li>B. {{ question.option_b }}</li>
+                    <li>C. {{ question.option_c }}</li>
+                    <li>D. {{ question.option_d }}</li>
+                </ul>
+                <p><strong>Correct Answer:</strong> Option {{ question.correct_option }}</p>
+            </li>
+        {% endfor %}
+    </ol>
+{% else %}
+    <p>No questions available for this quiz.</p>
+{% endif %}
+
+<hr>
+
+<a href="{% url 'take_quiz' quiz.id %}" class="btn btn-primary">Take Quiz</a>
+<a href="{% url 'all_quizzes' %}" class="btn btn-secondary">Back to All Quizzes</a>
+{% endblock %}

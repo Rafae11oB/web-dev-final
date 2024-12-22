@@ -1,0 +1,20 @@
+{% extends 'courses/base.html' %}
+
+{% block title %}All Quizzes - Online Courses{% endblock %}
+
+{% block content %}
+<h2>All Quizzes</h2>
+{% if quizzes %}
+    <div class="list-group">
+        {% for quiz in quizzes %}
+            <a href="{% url 'quiz_detail' quiz.id %}" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">{{ quiz.title }}</h5>
+                <p class="mb-1">Course: <strong>{{ quiz.course.title }}</strong></p>
+                <small>Total Marks: {{ quiz.total_marks }}</small>
+            </a>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No quizzes are available at the moment.</p>
+{% endif %}
+{% endblock %}

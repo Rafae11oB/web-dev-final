@@ -1,0 +1,24 @@
+{% extends 'courses/base.html' %}
+
+{% block title %}Quizzes for {{ course.title }} - Online Courses{% endblock %}
+
+{% block content %}
+<h2>Quizzes for "{{ course.title }}"</h2>
+
+{% if quizzes %}
+    <div class="list-group">
+        {% for quiz in quizzes %}
+            <a href="{% url 'quiz_detail' quiz.id %}" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">{{ quiz.title }}</h5>
+                <p class="mb-1">Total Marks: {{ quiz.total_marks }}</p>
+            </a>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No quizzes are available for this course.</p>
+{% endif %}
+
+<hr>
+
+<a href="{% url 'course_detail' course.id %}" class="btn btn-secondary">Back to Course Details</a>
+{% endblock %}

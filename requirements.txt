@@ -1,0 +1,36 @@
+# Django framework
+Django>=4.0,<5.0
+
+# Django REST Framework for building APIs
+djangorestframework>=3.14.0,<4.0
+
+# drf-yasg for automatic API documentation (Swagger & Redoc)
+drf-yasg>=1.20.0,<2.0
+
+# PostgreSQL database adapter for Django
+psycopg2-binary>=2.9.0,<3.0
+
+# Gunicorn for serving the Django application in production
+gunicorn>=20.1.0,<21.0
+
+# Whitenoise for serving static files efficiently
+whitenoise>=6.0.0,<7.0
+
+# django-cors-headers for handling Cross-Origin Resource Sharing (CORS)
+django-cors-headers>=3.13.0,<4.0
+
+# Optional: django-filter for advanced filtering in DRF
+django-filter>=22.1.0,<23.0
+
+# Optional: django-environ for environment variable management
+django-environ>=0.9.0,<1.0
+
+# Optional: django-debug-toolbar for debugging (useful in development)
+django-debug-toolbar>=3.7.0,<4.0
+
+# Optional: djangorestframework-simplejwt for JWT authentication
+djangorestframework-simplejwt>=5.2.0,<6.0
+
+# Optional: whitenoise to serve static files in production
+whitenoise>=6.0.0,<7.0
+
